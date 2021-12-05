@@ -147,7 +147,7 @@ impl<const N: usize> Blake2<N>
 }
 
 pub fn longs_from_bytes(out: &mut [u64], b: &[u8]) -> std::result::Result<(), &'static str> {
-    if out.len() != b.len() * 8 {
+    if out.len() * 8 != b.len() {
         Err("length mismatch")
     } else {
         for (o, i) in out.iter_mut().zip((0..).step_by(8)) {
@@ -167,7 +167,7 @@ pub fn mk_longs_from_bytes(b: &[u8]) -> std::result::Result<Vec<u64>, &'static s
 }
 
 pub fn bytes_from_longs(out: &mut [u8], l: &[u64]) -> std::result::Result<(), &'static str> {
-    if out.len() * 8 != l.len() {
+    if out.len() != l.len() * 8 {
         Err("length mismatch")
     } else {
         for (l, i) in l.iter().zip((0..).step_by(8)) {
